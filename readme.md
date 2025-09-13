@@ -3,7 +3,7 @@
 
 # Завдання 2
 
-* Додано анімацію на додавання нової коробки до списку
+Додано анімацію на додавання нової коробки до списку
   ```tsx
   
   if (
@@ -29,7 +29,7 @@
   ```tsx
   <Button label="Increment" onPress={() => setCounter((c) => c + 1)} />
   ```
-Та
+У компоненті `BoxListScreen` виводився лог:
   ```tsx
   console.log("BoxListScreen render");
   ```
@@ -52,7 +52,7 @@
   ```
 
 Змінено handleOpen на використання useCallback у BoxListScreen 
-```
+```tsx
   const handleOpen = useCallback(
     (box: Box) => {
       navigation.navigate(boxesStackRoutes.BOX_DETAILS, { boxId: box.id });
@@ -60,7 +60,6 @@
     [navigation]
   );
 ```
-
 
 ## Результати
 
@@ -71,7 +70,9 @@
   ```
 Повторного `BoxList render` не було. Що є очікувано, а от до цієї зміни 
 
-Повідомлення `[why-did-you-render] ... unnecessary` не з’являлося. Чому так і не зміг знайти причину
+Повідомлення `[why-did-you-render] ... unnecessary` не з’являлося. ## ❓Чому так і не зміг знайти причину
+
+![Приклад логів](./b1.jpg)
 
 
 # Завдання 4
