@@ -91,6 +91,7 @@
   const newBox = {
       title: `New box #${n}`,
       createdAt: new Date().toISOString(),
+      ...
     };
 ```
 ![Приклад бандла](./b2.jpg)
