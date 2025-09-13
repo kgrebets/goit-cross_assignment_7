@@ -20,27 +20,27 @@
 
 
 # Завдання 3
-* Я перевіряв роботу бібліотеки [`@welldone-software/why-did-you-render`](https://github.com/welldone-software/why-did-you-render), яка допомагає виявляти непотрібні ререндери.
+Я перевіряв роботу бібліотеки [`@welldone-software/why-did-you-render`](https://github.com/welldone-software/why-did-you-render), яка допомагає виявляти непотрібні ререндери.
 
 ## Що було зроблено
 
-* Додано штучний стан `counter` у `BoxListScreen` та кнопку **Increment** для виклику повторних ререндерів:
+Додано штучний стан `counter` у `BoxListScreen` та кнопку **Increment** для виклику повторних ререндерів:
 
   ```tsx
   <Button label="Increment" onPress={() => setCounter((c) => c + 1)} />
   ```
-* Та
+Та
   ```tsx
   console.log("BoxListScreen render");
   ```
 
-* У компоненті `BoxList` виводився лог:
+У компоненті `BoxList` виводився лог:
 
   ```tsx
   console.log("BoxList render");
   ```
 
-* Увімкнено відстеження в `App.tsx`:
+Увімкнено відстеження в `App.tsx`:
 
   ```tsx
   const whyDidYouRender = require("@welldone-software/why-did-you-render");
@@ -51,7 +51,7 @@
   });
   ```
 
-* Змінено handleOpen на використання useCallback у BoxListScreen 
+Змінено handleOpen на використання useCallback у BoxListScreen 
 ```
   const handleOpen = useCallback(
     (box: Box) => {
@@ -64,14 +64,14 @@
 
 ## Результати
 
-* При натисканні на **Increment** у консолі з’являвся тільки:
+При натисканні на **Increment** у консолі з’являвся тільки:
 
   ```
   BoxListScreen render
   ```
-* Повторного `BoxList render` не було. Що є очікувано, а от до цієї зміни 
+Повторного `BoxList render` не було. Що є очікувано, а от до цієї зміни 
 
-* Повідомлення `[why-did-you-render] ... unnecessary` не з’являлося. Чому так і не зміг знайти причину
+Повідомлення `[why-did-you-render] ... unnecessary` не з’являлося. Чому так і не зміг знайти причину
 
 
-# Завдання 3
+# Завдання 4
