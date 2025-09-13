@@ -1,8 +1,26 @@
-# Оптимізація ререндерів у React Native
+# Завдання 1
+Виявив у package.json використання statusbar котрий не використовується - видалив.
 
-Я перевіряв роботу бібліотеки [`@welldone-software/why-did-you-render`](https://github.com/welldone-software/why-did-you-render), яка допомагає виявляти непотрібні ререндери.
+# Завдання 2
 
----
+* Додано анімацію на додавання нової коробки до списку
+  ```tsx
+  
+  if (
+    Platform.OS === "android" &&
+    UIManager.setLayoutAnimationEnabledExperimental
+  ) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+
+  ...
+
+  LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  ```
+
+
+# Завдання 3
+* Я перевіряв роботу бібліотеки [`@welldone-software/why-did-you-render`](https://github.com/welldone-software/why-did-you-render), яка допомагає виявляти непотрібні ререндери.
 
 ## Що було зроблено
 
@@ -10,6 +28,10 @@
 
   ```tsx
   <Button label="Increment" onPress={() => setCounter((c) => c + 1)} />
+  ```
+* Та
+  ```tsx
+  console.log("BoxListScreen render");
   ```
 
 * У компоненті `BoxList` виводився лог:
@@ -51,3 +73,5 @@
 
 * Повідомлення `[why-did-you-render] ... unnecessary` не з’являлося. Чому так і не зміг знайти причину
 
+
+# Завдання 3
