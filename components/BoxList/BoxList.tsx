@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   FlatList,
   View,
@@ -17,10 +17,11 @@ type BoxListProps = {
   onPressBox?: (box: Box) => void;
 };
 
-export default function BoxList({ data, onPressBox }: BoxListProps) {
+function BoxList({ data, onPressBox }: BoxListProps) {
+  console.log("BoxList render");
+
   const { width, height } = useWindowDimensions();
-  const isLandscape = width > height;
-  const numColumns = isLandscape ? 2 : 1;
+  const numColumns = useMemo(() => (width > height ? 2 : 1), [width, height]);
 
   return (
     <FlatList
@@ -33,10 +34,7 @@ export default function BoxList({ data, onPressBox }: BoxListProps) {
       renderItem={({ item }) => (
         <Pressable
           onPress={() => onPressBox?.(item)}
-          style={({ pressed }) => [
-            styles.card,
-            pressed && { opacity: 0.6 },
-          ]}
+          style={({ pressed }) => [styles.card, pressed && { opacity: 0.6 }]}
         >
           <View style={styles.leftThumb}>
             {item.imageUrl ? (
@@ -67,6 +65,9 @@ export default function BoxList({ data, onPressBox }: BoxListProps) {
     />
   );
 }
+
+BoxList.whyDidYouRender = true;
+export default React.memo(BoxList);
 
 const styles = StyleSheet.create({
   listContainer: {

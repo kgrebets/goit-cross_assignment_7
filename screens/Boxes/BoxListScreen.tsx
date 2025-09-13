@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState, useCallback } from "react";
 import {
   View,
   StyleSheet,
@@ -26,12 +26,17 @@ type BoxListNavProp = StackNavigationProp<
   typeof boxesStackRoutes.BOXES_LIST
 >;
 
-export default function BoxListScreen() {
+export function BoxListScreen() {
+  console.log("BoxListScreen render");
+  const [counter, setCounter] = useState(0);
+
   const dispatch = useDispatch<AppDispatch>();
   const { items: boxes, loading } = useSelector(
     (state: RootState) => state.boxes
   );
   const [query, setQuery] = useState("");
+
+  const navigation = useNavigation<BoxListNavProp>();
 
   useEffect(() => {
     dispatch(fetchBoxes());
@@ -54,7 +59,7 @@ export default function BoxListScreen() {
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 
-  const handleAdd = () => {
+  const handleAdd = useCallback(() => {
     const n = (boxes.length || 0) + 1;
     const newBox = {
       title: `New box #${n}`,
@@ -66,12 +71,14 @@ export default function BoxListScreen() {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
     dispatch(addBox(newBox));
-  };
+  }, [boxes.length, dispatch]);
 
-  const navigation = useNavigation<BoxListNavProp>();
-  const handleOpen = (box: Box) => {
-    navigation.navigate(boxesStackRoutes.BOX_DETAILS, { boxId: box.id });
-  };
+  const handleOpen = useCallback(
+    (box: Box) => {
+      navigation.navigate(boxesStackRoutes.BOX_DETAILS, { boxId: box.id });
+    },
+    [navigation]
+  );
 
   if (loading) {
     return (
@@ -87,6 +94,8 @@ export default function BoxListScreen() {
         <SearchBar value={query} onChangeText={setQuery} />
       </View>
 
+      <Button label="Increment" onPress={() => setCounter((c) => c + 1)} />
+
       <BoxList data={filteredBoxes} onPressBox={handleOpen} />
 
       <View style={styles.addContainer}>
@@ -95,6 +104,8 @@ export default function BoxListScreen() {
     </SafeAreaView>
   );
 }
+
+export default memo(BoxListScreen);
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background },
