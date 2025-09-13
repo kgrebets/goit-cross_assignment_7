@@ -76,4 +76,21 @@
 
 
 # Завдання 4
+З використанням moment
+```tsx
+  const newBox = {
+      title: `New box #${n}`,
+      createdAt: moment().toISOString(),
+     ...
+    };
+```
+![Приклад бандла](./b3.jpg)
+
+З використанням moment
+```tsx
+  const newBox = {
+      title: `New box #${n}`,
+      createdAt: new Date().toISOString(),
+    };
+```
 ![Приклад бандла](./b2.jpg)
