@@ -86,7 +86,7 @@
 ```
 ![Приклад бандла](./b3.jpg)
 
-З використанням moment
+З використанням Date
 ```tsx
   const newBox = {
       title: `New box #${n}`,
